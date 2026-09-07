@@ -33,6 +33,12 @@ class SiteSettings extends Settings
     /** Relative path (on the public disk) to the profile headshot. */
     public ?string $profile_photo;
 
+    /** Relative path (on the public disk) to the framed hero screenshot. */
+    public ?string $hero_artifact;
+
+    /** Optional window title-bar label for the hero screenshot; falls back to $name. */
+    public ?string $hero_artifact_label;
+
     /** Relative paths (on the public disk) to the CV PDFs. */
     public ?string $cv_en;
 

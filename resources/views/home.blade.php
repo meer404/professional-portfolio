@@ -5,6 +5,7 @@
     $locale = app()->getLocale();
     $phrases = $settings->hero_phrases[$locale] ?? $settings->hero_phrases['en'] ?? [];
     $photo = $settings->assetUrl($settings->profile_photo);
+    $artifact = $settings->assetUrl($settings->hero_artifact);
     $cvEn = $settings->assetUrl($settings->cv_en);
     $cvCkb = $settings->assetUrl($settings->cv_ckb);
     $primaryCv = $locale === 'ckb' ? ($cvCkb ?? $cvEn) : ($cvEn ?? $cvCkb);
@@ -58,21 +59,33 @@
             </div>
         </div>
 
-        <div class="relative mx-auto w-full max-w-xs lg:max-w-sm" x-reveal>
-            <div class="absolute inset-0 -z-10 rounded-[2rem] bg-linear-to-br from-brand-500 to-accent-500 opacity-30 blur-2xl"></div>
-            <div class="rounded-[2rem] bg-linear-to-br from-brand-500 via-brand-400 to-accent-500 p-1">
-                <div class="overflow-hidden rounded-[1.85rem] bg-white dark:bg-slate-900">
-                    @if ($photo)
-                        <img src="{{ $photo }}" alt="{{ $settings->name }}" class="aspect-4/5 w-full object-cover" width="480" height="600">
-                    @else
-                        <div class="grid aspect-4/5 w-full place-items-center bg-linear-to-br from-brand-100 to-accent-100 p-12 dark:from-slate-800 dark:to-slate-800">
-                            <img src="{{ asset('brand/mir-icon-purple.svg') }}" alt="{{ $settings->name }}" class="w-full opacity-80 dark:hidden">
-                            <img src="{{ asset('brand/mir-icon-white.svg') }}" alt="{{ $settings->name }}" class="hidden w-full opacity-90 dark:block">
-                        </div>
-                    @endif
+        @if ($artifact)
+            <div class="relative mx-auto w-full max-w-md lg:max-w-lg" x-reveal>
+                <x-window-frame :label="$settings->hero_artifact_label ?: $settings->name" class="w-full">
+                    <img src="{{ $artifact }}" alt="" class="h-full w-full object-cover">
+                </x-window-frame>
+                @if ($photo)
+                    <img src="{{ $photo }}" alt="{{ $settings->name }}"
+                         class="absolute -bottom-5 start-4 h-20 w-20 rounded-2xl object-cover shadow-lg ring-2 ring-brand-500 ring-offset-2 ring-offset-white dark:ring-offset-slate-950">
+                @endif
+            </div>
+        @else
+            <div class="relative mx-auto w-full max-w-xs lg:max-w-sm" x-reveal>
+                <div class="absolute inset-0 -z-10 rounded-[2rem] bg-linear-to-br from-brand-500 to-accent-500 opacity-30 blur-2xl"></div>
+                <div class="rounded-[2rem] bg-linear-to-br from-brand-500 via-brand-400 to-accent-500 p-1">
+                    <div class="overflow-hidden rounded-[1.85rem] bg-white dark:bg-slate-900">
+                        @if ($photo)
+                            <img src="{{ $photo }}" alt="{{ $settings->name }}" class="aspect-4/5 w-full object-cover" width="480" height="600">
+                        @else
+                            <div class="grid aspect-4/5 w-full place-items-center bg-linear-to-br from-brand-100 to-accent-100 p-12 dark:from-slate-800 dark:to-slate-800">
+                                <img src="{{ asset('brand/mir-icon-purple.svg') }}" alt="{{ $settings->name }}" class="w-full opacity-80 dark:hidden">
+                                <img src="{{ asset('brand/mir-icon-white.svg') }}" alt="{{ $settings->name }}" class="hidden w-full opacity-90 dark:block">
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
 </section>
 

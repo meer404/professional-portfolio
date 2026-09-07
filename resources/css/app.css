@@ -31,7 +31,12 @@
     --color-accent-500: #3b82f6;
     --color-accent-600: #2563eb;
 
-    --color-ink: #0f172a;
+    --color-ink: #14121f;
+
+    /* Window-chrome frame around project screenshots */
+    --color-paper: #faf9fc;
+    --color-line: #e4e1ec;
+    --color-line-dark: #2a2636;
 
     --shadow-glow: 0 0 60px -12px rgba(124, 58, 237, 0.45);
     --animate-marquee: marquee 30s linear infinite;
@@ -114,6 +119,11 @@
 
 @utility prose-body {
     @apply text-base leading-relaxed text-slate-600 dark:text-slate-300;
+}
+
+/* Restrained hover for framed project cards: a small lift, nothing else. */
+@utility frame-lift {
+    @apply transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transform-none;
 }
 
 @layer utilities {

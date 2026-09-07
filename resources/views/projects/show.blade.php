@@ -96,9 +96,11 @@
                     <div class="mt-4 grid gap-4 sm:grid-cols-2">
                         @foreach ($shots as $i => $shot)
                             <button type="button" @click="active = {{ $i }}; open = true"
-                                    class="group overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
-                                <img src="{{ $shot->getUrl('web') }}" alt="{{ $shot->getCustomProperty('caption', '') }}" loading="lazy"
-                                     class="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                                    class="block w-full cursor-zoom-in text-start">
+                                <x-window-frame :label="$project->title">
+                                    <img src="{{ $shot->getUrl('web') }}" alt="{{ $shot->getCustomProperty('caption', '') }}" loading="lazy"
+                                         class="h-full w-full object-cover">
+                                </x-window-frame>
                             </button>
                         @endforeach
                     </div>
@@ -116,12 +118,15 @@
                             <button x-show="shots > 1" @click="active = (active + 1) % shots" class="absolute end-4 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white hover:bg-white/20" aria-label="Next">
                                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
                             </button>
-                            <div class="max-h-[85vh] max-w-4xl">
+                            <div class="max-h-[85vh] max-w-none">
                                 @foreach ($shots as $i => $shot)
-                                    <figure x-show="active === {{ $i }}">
-                                        <img src="{{ $shot->getUrl('web') }}" alt="{{ $shot->getCustomProperty('caption', '') }}" class="max-h-[80vh] w-auto rounded-lg">
+                                    <figure x-show="active === {{ $i }}" class="flex flex-col items-center">
+                                        <x-window-frame tone="dark" ratio="auto" :label="$project->title" class="mx-auto w-fit max-w-[85vw]">
+                                            <img src="{{ $shot->getUrl('web') }}" alt="{{ $shot->getCustomProperty('caption', '') }}"
+                                                 class="block max-h-[75vh] w-auto max-w-[85vw]">
+                                        </x-window-frame>
                                         @if ($shot->getCustomProperty('caption'))
-                                            <figcaption class="mt-2 text-center text-sm text-slate-300">{{ $shot->getCustomProperty('caption') }}</figcaption>
+                                            <figcaption class="mt-3 text-center text-sm text-slate-300">{{ $shot->getCustomProperty('caption') }}</figcaption>
                                         @endif
                                     </figure>
                                 @endforeach

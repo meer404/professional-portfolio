@@ -57,6 +57,19 @@ class ManageSiteSettings extends SettingsPage
                     Forms\Components\TagsInput::make('hero_phrases.ckb')
                         ->label('Rotating phrases (Kurdish)')
                         ->default([]),
+
+                    Forms\Components\FileUpload::make('hero_artifact')
+                        ->label('Hero screenshot')
+                        ->image()
+                        ->imageEditor()
+                        ->disk('public')
+                        ->directory('site')
+                        ->helperText('A screenshot of one of your projects, shown in a framed window in the hero. Landscape (16:9) works best.'),
+
+                    Forms\Components\TextInput::make('hero_artifact_label')
+                        ->label('Hero screenshot label')
+                        ->maxLength(60)
+                        ->helperText('Shown in the window title bar. Defaults to your name.'),
                 ]),
 
                 Forms\Components\Tabs\Tab::make('About')->icon('heroicon-m-identification')->schema([

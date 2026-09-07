@@ -4,20 +4,20 @@
 @endphp
 
 <a href="{{ route('projects.show', $project) }}"
-   class="card group flex flex-col overflow-hidden !p-0 hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-600/10 dark:hover:border-brand-700"
+   class="card group flex flex-col gap-3 p-3 frame-lift"
    x-reveal>
-    <div class="aspect-video overflow-hidden bg-linear-to-br from-brand-100 to-accent-100 dark:from-slate-800 dark:to-slate-800">
+    <x-window-frame :label="$project->title">
         @if ($thumbUrl)
-            <img src="{{ $thumbUrl }}" alt="" loading="lazy"
-                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <img src="{{ $thumbUrl }}" alt="" loading="lazy" class="h-full w-full object-cover">
         @else
-            <div class="grid h-full w-full place-items-center font-display text-3xl font-bold text-brand-500/60">
-                {{ Str::limit($project->title, 18) }}
+            <div class="grid h-full w-full place-items-center bg-linear-to-br from-brand-100 to-accent-100 dark:from-slate-800 dark:to-slate-800">
+                <img src="{{ asset('brand/mir-icon-purple.svg') }}" alt="" class="h-10 w-10 opacity-40 dark:hidden">
+                <img src="{{ asset('brand/mir-icon-white.svg') }}" alt="" class="hidden h-10 w-10 opacity-40 dark:block">
             </div>
         @endif
-    </div>
+    </x-window-frame>
 
-    <div class="flex flex-1 flex-col p-5">
+    <div class="flex flex-1 flex-col p-2">
         <h3 class="font-display text-lg font-semibold text-slate-900 group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-300">
             {{ $project->title }}
         </h3>
