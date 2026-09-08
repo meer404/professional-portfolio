@@ -57,7 +57,7 @@ class PortfolioTest extends TestCase
 
         $this->get('/projects/demo-project')
             ->assertOk()
-            ->assertSeeInOrder(['Problem', 'What I Built', 'Key Features', 'Tech Stack', 'My Role', 'Outcome'])
+            ->assertSeeInOrder(['Case study', 'A problem statement.', 'What I Built', 'Key Features', 'At a glance', 'My Role', 'Tech Stack', 'Outcome'])
             ->assertSee('View on GitHub');
     }
 
