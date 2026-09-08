@@ -2,6 +2,10 @@
 
 @section('title', $project->title . ' — ' . $settings->name)
 @section('meta_description', $project->problem)
+@section('og_type', 'article')
+@section('og_title', $project->title . ' — ' . $settings->name)
+@section('og_description', strip_tags($project->problem ?? ''))
+@section('og_image', $project->getFirstMedia('screenshots')?->getUrl('web') ?? ($settings->assetUrl($settings->profile_photo) ?? asset('brand/mir-icon-purple.svg')))
 
 @section('content')
 @php

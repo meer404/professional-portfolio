@@ -16,6 +16,19 @@
     <title>@yield('title', $settings->name . ' — ' . ($settings->trans('hero_tagline') ?: __('Full-Stack Developer')))</title>
     <meta name="description" content="@yield('meta_description', strip_tags($settings->trans('about_me') ?? ''))">
 
+    {{-- Social / Open Graph + Twitter Card --}}
+    <meta property="og:title" content="@yield('og_title', $settings->name . ' — ' . ($settings->trans('hero_tagline') ?: __('Full-Stack Developer')))">
+    <meta property="og:description" content="@yield('og_description', strip_tags($settings->trans('about_me') ?? ''))">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:site_name" content="{{ $settings->name }}">
+    <meta property="og:image" content="@yield('og_image', $settings->assetUrl($settings->profile_photo) ?? asset('brand/mir-icon-purple.svg'))">
+    <meta property="og:locale" content="{{ str_replace('-', '_', app()->getLocale() === 'ckb' ? 'ckb_IQ' : 'en_US') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('og_title', $settings->name . ' — ' . ($settings->trans('hero_tagline') ?: __('Full-Stack Developer')))">
+    <meta name="twitter:description" content="@yield('og_description', strip_tags($settings->trans('about_me') ?? ''))">
+    <meta name="twitter:image" content="@yield('og_image', $settings->assetUrl($settings->profile_photo) ?? asset('brand/mir-icon-purple.svg'))">
+
     {{-- Resolve theme before first paint to avoid a flash --}}
     <script>
         (function () {

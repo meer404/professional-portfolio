@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('og_type', 'website')
+
 @section('content')
 @php
     $locale = app()->getLocale();
