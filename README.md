@@ -57,3 +57,13 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+├──────────┼─────────────────────────────────────────────────────────────────────┤
+│ Site     │ http://127.0.0.1:8000 (dev server is running now in the background) │
+├──────────┼─────────────────────────────────────────────────────────────────────┤
+│ Admin    │ http://127.0.0.1:8000/admin                                         │
+├──────────┼─────────────────────────────────────────────────────────────────────┤
+│ Email    │ mirmohammedrashid@gmail.com                                         │
+├──────────┼─────────────────────────────────────────────────────────────────────┤
+│ Password │ rLYyQ4mtNdP3g7Ib — save this; re-running the seeder won't reset it  │
