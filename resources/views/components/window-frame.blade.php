@@ -1,7 +1,7 @@
 @props([
     'label' => null,
     'tone' => 'auto',   {{-- 'auto' = paper/ink chrome ; 'dark' = force ink chrome (lightbox) --}}
-    'ratio' => '16/9',  {{-- '16/9' = fixed media well (grids) ; 'auto' = shrink-wrap (lightbox) --}}
+    'ratio' => '16/9',  {{-- '16/9' = fixed media well ; 'auto' = shrink-wrap (lightbox) ; 'none' = caller owns the body --}}
 ])
 
 @php
@@ -36,6 +36,8 @@
 
     @if ($ratio === 'auto')
         <div class="flex items-center justify-center">{{ $slot }}</div>
+    @elseif ($ratio === 'none')
+        {{ $slot }}
     @else
         <div class="aspect-video overflow-hidden">{{ $slot }}</div>
     @endif
