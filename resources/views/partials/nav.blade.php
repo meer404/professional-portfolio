@@ -1,16 +1,38 @@
 @php
     $locale = app()->getLocale();
     $navLinks = [
-        ['label' => __('About'), 'href' => route('home') . '#about'],
-        ['label' => __('Skills'), 'href' => route('home') . '#skills'],
-        ['label' => __('Projects'), 'href' => route('projects.index')],
-        ['label' => __('Résumé'), 'href' => route('home') . '#resume'],
-        ['label' => __('Contact'), 'href' => route('home') . '#contact'],
+        ['label' => __('About'), 'href' => route('home') . '#about', 'section' => 'about'],
+        ['label' => __('Skills'), 'href' => route('home') . '#skills', 'section' => 'skills'],
+        ['label' => __('Projects'), 'href' => route('projects.index'), 'section' => 'projects'],
+        ['label' => __('Résumé'), 'href' => route('home') . '#resume', 'section' => 'resume'],
+        ['label' => __('Contact'), 'href' => route('home') . '#contact', 'section' => 'contact'],
     ];
+    $initialSection = request()->routeIs('projects.*') ? 'projects' : '';
 @endphp
 
 <header
-    x-data="{ scrolled: false, open: false }"
+    x-data="{ scrolled: false, open: false, activeSection: '{{ $initialSection }}' }"
+    x-init="
+        const ids = ['about', 'skills', 'projects', 'resume', 'contact'];
+        if (document.getElementById('about')) {
+            const present = ids.filter((id) => document.getElementById(id));
+            const spy = () => {
+                let current = '';
+                if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+                    current = present[present.length - 1] || '';
+                } else {
+                    const line = window.innerHeight * 0.3;
+                    for (const id of present) {
+                        if (document.getElementById(id).getBoundingClientRect().top <= line) current = id;
+                    }
+                }
+                activeSection = current;
+            };
+            spy();
+            window.addEventListener('scroll', spy, { passive: true });
+            window.addEventListener('resize', spy, { passive: true });
+        }
+    "
     @scroll.window="scrolled = window.scrollY > 12"
     :class="scrolled ? 'border-slate-200/70 bg-white/80 shadow-sm backdrop-blur-lg dark:border-slate-800/70 dark:bg-slate-950/80' : 'border-transparent bg-transparent'"
     class="fixed inset-x-0 top-0 z-40 border-b transition-all duration-300"
@@ -23,7 +45,12 @@
 
         <div class="hidden items-center gap-1 md:flex">
             @foreach ($navLinks as $link)
-                <a href="{{ $link['href'] }}" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-brand-700 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">
+                <a href="{{ $link['href'] }}"
+                   :aria-current="activeSection === '{{ $link['section'] }}' ? 'page' : null"
+                   :class="activeSection === '{{ $link['section'] }}'
+                       ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-white'
+                       : 'text-slate-600 hover:bg-slate-100 hover:text-brand-700 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white'"
+                   class="rounded-lg px-3 py-2 text-sm font-medium transition-colors">
                     {{ $link['label'] }}
                 </a>
             @endforeach
@@ -76,7 +103,12 @@
                 </div>
                 <div class="mt-6 flex flex-col gap-1">
                     @foreach ($navLinks as $link)
-                        <a href="{{ $link['href'] }}" @click="open = false" class="rounded-lg px-3 py-2.5 text-base font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">
+                        <a href="{{ $link['href'] }}" @click="open = false"
+                           :aria-current="activeSection === '{{ $link['section'] }}' ? 'page' : null"
+                           :class="activeSection === '{{ $link['section'] }}'
+                               ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-white'
+                               : 'text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800'"
+                           class="rounded-lg px-3 py-2.5 text-base font-medium">
                             {{ $link['label'] }}
                         </a>
                     @endforeach
