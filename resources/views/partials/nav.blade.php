@@ -2,9 +2,9 @@
     $locale = app()->getLocale();
     $navLinks = [
         ['label' => __('About'), 'href' => route('home') . '#about', 'section' => 'about'],
+        ['label' => __('Résumé'), 'href' => route('home') . '#resume', 'section' => 'resume'],
         ['label' => __('Skills'), 'href' => route('home') . '#skills', 'section' => 'skills'],
         ['label' => __('Projects'), 'href' => route('projects.index'), 'section' => 'projects'],
-        ['label' => __('Résumé'), 'href' => route('home') . '#resume', 'section' => 'resume'],
         ['label' => __('Contact'), 'href' => route('home') . '#contact', 'section' => 'contact'],
     ];
     $initialSection = request()->routeIs('projects.*') ? 'projects' : '';
@@ -13,7 +13,7 @@
 <header
     x-data="{ scrolled: false, open: false, activeSection: '{{ $initialSection }}' }"
     x-init="
-        const ids = ['about', 'skills', 'projects', 'resume', 'contact'];
+        const ids = ['about', 'resume', 'skills', 'projects', 'contact'];
         if (document.getElementById('about')) {
             const present = ids.filter((id) => document.getElementById(id));
             const spy = () => {

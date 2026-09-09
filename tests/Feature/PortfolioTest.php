@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Client;
 use App\Models\ContactMessage;
 use App\Models\Project;
 use App\Models\Skill;
@@ -16,7 +17,7 @@ class PortfolioTest extends TestCase
     {
         parent::setUp();
 
-        Skill::create(['name' => 'Laravel', 'category' => 'Backend', 'proficiency' => 90, 'sort_order' => 0]);
+        Skill::create(['name' => 'Laravel', 'category' => 'Backend', 'icon' => 'laravel', 'sort_order' => 0]);
     }
 
     private function makeProject(array $overrides = []): Project
@@ -59,6 +60,37 @@ class PortfolioTest extends TestCase
             ->assertOk()
             ->assertSeeInOrder(['Case study', 'A problem statement.', 'What I Built', 'Key Features', 'At a glance', 'My Role', 'Tech Stack', 'Outcome'])
             ->assertSee('View on GitHub');
+    }
+
+    public function test_home_page_shows_active_clients_marquee(): void
+    {
+        Client::create([
+            'name' => 'Rayan Digital',
+            'website_url' => 'https://example.com',
+            'is_active' => true,
+            'sort_order' => 1,
+        ]);
+
+        Client::create([
+            'name' => 'Hidden Client Co',
+            'is_active' => false,
+            'sort_order' => 2,
+        ]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('id="clients"', false)
+            ->assertSee('Rayan Digital')
+            ->assertDontSee('Hidden Client Co');
+    }
+
+    public function test_clients_section_is_hidden_when_none_are_active(): void
+    {
+        $this->makeProject();
+
+        $this->get('/')
+            ->assertOk()
+            ->assertDontSee('id="clients"', false);
     }
 
     public function test_unknown_project_slug_is_404(): void

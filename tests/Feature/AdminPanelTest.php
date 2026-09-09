@@ -25,6 +25,8 @@ class AdminPanelTest extends TestCase
         $this->get('/admin/projects')->assertOk();
         $this->get('/admin/projects/create')->assertOk();
         $this->get('/admin/skills')->assertOk();
+        $this->get('/admin/clients')->assertOk();
+        $this->get('/admin/clients/create')->assertOk();
         $this->get('/admin/contact-messages')->assertOk();
         $this->get('/admin/manage-site-settings')->assertOk();
     }

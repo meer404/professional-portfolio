@@ -138,8 +138,42 @@
         opacity: 1;
         transform: none;
     }
+
+    /* ---- Clients / "Trusted by" logo ticker -------------------------------- *
+     * Two rows scrolling opposite ways, no pause. The track's layout stays LTR
+     * in every locale so the -50% loop is correct; on RTL each row's animation
+     * direction is flipped so the motion follows the reading direction.        */
+    .client-marquee {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        direction: ltr; /* conveyor mechanics stay LTR in every locale (RTL flips only the speed sign) */
+    }
+    .client-marquee__viewport {
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    }
+    .client-marquee__track {
+        display: flex;
+        width: max-content;
+        gap: 1rem;
+        animation: marquee 36s linear infinite;
+    }
+    .client-marquee__track--reverse {
+        animation-direction: reverse;
+    }
+    .client-marquee--rtl .client-marquee__track {
+        animation-direction: reverse;
+    }
+    .client-marquee--rtl .client-marquee__track--reverse {
+        animation-direction: normal;
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .reveal { opacity: 1; transform: none; transition: none; }
         html { scroll-behavior: auto; }
+        .client-marquee__track { animation: none; }
+        .client-marquee__viewport { overflow-x: auto; }
     }
 }

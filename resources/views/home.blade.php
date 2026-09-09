@@ -104,8 +104,29 @@
     </div>
 </section>
 
+{{-- ============================ RÉSUMÉ ============================ --}}
+<section id="resume" class="scroll-mt-24 bg-slate-50 py-20 dark:bg-slate-900/40">
+    <div class="container-x grid gap-10 lg:grid-cols-[0.4fr_0.6fr]" x-reveal>
+        <div>
+            <p class="section-eyebrow">{{ __('Résumé') }}</p>
+            <h2 class="mt-2 text-3xl font-bold sm:text-4xl">{{ __('Education & experience') }}</h2>
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
+                @if ($cvEn)
+                    <a href="{{ $cvEn }}" target="_blank" rel="noopener" class="btn-primary">{{ __('Download CV (English)') }}</a>
+                @endif
+                @if ($cvCkb)
+                    <a href="{{ $cvCkb }}" target="_blank" rel="noopener" class="btn-ghost">{{ __('Download CV (Kurdish)') }}</a>
+                @endif
+            </div>
+        </div>
+        <div class="prose-body space-y-4 text-lg">
+            {!! $settings->trans('resume_summary') !!}
+        </div>
+    </div>
+</section>
+
 {{-- ============================ SKILLS ============================ --}}
-<section id="skills" class="scroll-mt-24 bg-slate-50 py-20 dark:bg-slate-900/40">
+<section id="skills" class="scroll-mt-24 py-20">
     <div class="container-x">
         <div class="max-w-2xl" x-reveal>
             <p class="section-eyebrow">{{ __('Skills') }}</p>
@@ -116,20 +137,16 @@
             @foreach ($skillGroups as $category => $skills)
                 <div class="card" x-reveal.delay-{{ $loop->index * 100 }}>
                     <h3 class="text-lg font-semibold">{{ $category }}</h3>
-                    <ul class="mt-4 space-y-3">
+                    <ul class="mt-4 grid grid-cols-2 gap-x-4 gap-y-3">
                         @foreach ($skills as $skill)
-                            <li>
-                                <div class="flex items-center justify-between text-sm">
-                                    <span class="font-medium text-slate-700 dark:text-slate-200">{{ $skill->name }}</span>
-                                    @if ($skill->proficiency)
-                                        <span class="text-xs text-slate-400">{{ $skill->proficiency }}%</span>
-                                    @endif
-                                </div>
-                                @if ($skill->proficiency)
-                                    <div class="mt-1.5 h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
-                                        <div class="h-full rounded-full bg-linear-to-r from-brand-500 to-accent-500" style="width: {{ $skill->proficiency }}%"></div>
-                                    </div>
+                            <li class="flex items-center gap-2.5 text-sm">
+                                @if ($skill->icon)
+                                    <img src="https://cdn.simpleicons.org/{{ $skill->icon }}/64748b" alt=""
+                                         class="h-5 w-5 shrink-0 dark:invert" loading="lazy" width="20" height="20">
+                                @else
+                                    <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500"></span>
                                 @endif
+                                <span class="font-medium text-slate-700 dark:text-slate-200">{{ $skill->name }}</span>
                             </li>
                         @endforeach
                     </ul>
@@ -139,8 +156,23 @@
     </div>
 </section>
 
+{{-- ============================ CLIENTS ============================ --}}
+@if ($clients->isNotEmpty())
+<section id="clients" class="scroll-mt-24 py-16">
+    <div class="container-x">
+        <div class="max-w-2xl" x-reveal>
+            <p class="section-eyebrow">{{ __('Clients') }}</p>
+            <h2 class="mt-2 text-3xl font-bold sm:text-4xl">{{ __('Trusted by') }}</h2>
+        </div>
+    </div>
+
+    {{-- Full-bleed, always-moving logo ticker. The clients collection is duplicated inside the component. --}}
+    <x-client-marquee :clients="$clients" class="mt-10" x-reveal />
+</section>
+@endif
+
 {{-- ======================= FEATURED PROJECTS ======================= --}}
-<section id="projects" class="scroll-mt-24 py-20">
+<section id="projects" class="scroll-mt-24 bg-slate-50 py-20 dark:bg-slate-900/40">
     <div class="container-x">
         <div class="flex flex-wrap items-end justify-between gap-4" x-reveal>
             <div class="max-w-2xl">
@@ -160,27 +192,6 @@
             @empty
                 <p class="prose-body col-span-full">{{ __('No projects yet — check back soon.') }}</p>
             @endforelse
-        </div>
-    </div>
-</section>
-
-{{-- ============================ RÉSUMÉ ============================ --}}
-<section id="resume" class="scroll-mt-24 bg-slate-50 py-20 dark:bg-slate-900/40">
-    <div class="container-x grid gap-10 lg:grid-cols-[0.4fr_0.6fr]" x-reveal>
-        <div>
-            <p class="section-eyebrow">{{ __('Résumé') }}</p>
-            <h2 class="mt-2 text-3xl font-bold sm:text-4xl">{{ __('Education & experience') }}</h2>
-            <div class="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
-                @if ($cvEn)
-                    <a href="{{ $cvEn }}" target="_blank" rel="noopener" class="btn-primary">{{ __('Download CV (English)') }}</a>
-                @endif
-                @if ($cvCkb)
-                    <a href="{{ $cvCkb }}" target="_blank" rel="noopener" class="btn-ghost">{{ __('Download CV (Kurdish)') }}</a>
-                @endif
-            </div>
-        </div>
-        <div class="prose-body space-y-4 text-lg">
-            {!! $settings->trans('resume_summary') !!}
         </div>
     </div>
 </section>

@@ -31,17 +31,16 @@ class SkillResource extends Resource
                 ->native(false)
                 ->default('Backend'),
 
+            Forms\Components\TextInput::make('icon')
+                ->label('Icon slug')
+                ->maxLength(255)
+                ->placeholder('laravel')
+                ->helperText('Simple Icons slug (see simpleicons.org) — e.g. "laravel", "php", "tailwindcss". Leave blank for no icon.'),
+
             Forms\Components\TextInput::make('sort_order')
                 ->numeric()
                 ->default(0)
                 ->helperText('Lower numbers appear first within a category.'),
-
-            Forms\Components\TextInput::make('proficiency')
-                ->numeric()
-                ->minValue(0)
-                ->maxValue(100)
-                ->suffix('%')
-                ->helperText('Optional — leave blank to show a plain badge instead of a bar.'),
         ]);
     }
 
@@ -52,12 +51,12 @@ class SkillResource extends Resource
             ->defaultGroup('category')
             ->defaultSort('sort_order')
             ->columns([
+                Tables\Columns\ImageColumn::make('icon')
+                    ->label('Icon')
+                    ->getStateUsing(fn (Skill $record) => $record->icon ? "https://cdn.simpleicons.org/{$record->icon}" : null)
+                    ->placeholder('—'),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable()->weight('bold'),
                 Tables\Columns\TextColumn::make('category')->badge()->sortable(),
-                Tables\Columns\TextColumn::make('proficiency')
-                    ->suffix('%')
-                    ->placeholder('—')
-                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('category')

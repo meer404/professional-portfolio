@@ -10,25 +10,38 @@ class SkillSeeder extends Seeder
     public function run(): void
     {
         $skills = [
-            'Backend' => ['PHP', 'Laravel', 'Filament', 'MySQL', 'REST APIs', 'Python'],
-            'Frontend' => ['Tailwind CSS', 'JavaScript', 'Alpine.js', 'Blade', 'PWA development'],
-            'Tools' => ['Git / GitHub', 'SQLite', 'Composer', 'Vite'],
-        ];
-
-        $proficiency = [
-            'PHP' => 92, 'Laravel' => 90, 'Filament' => 85, 'MySQL' => 85, 'REST APIs' => 82, 'Python' => 75,
-            'Tailwind CSS' => 88, 'JavaScript' => 80, 'Alpine.js' => 80, 'Blade' => 90, 'PWA development' => 75,
-            'Git / GitHub' => 85, 'SQLite' => 80, 'Composer' => 82, 'Vite' => 72,
+            'Backend' => [
+                'PHP' => 'php',
+                'Laravel' => 'laravel',
+                'Filament' => 'filament',
+                'MySQL' => 'mysql',
+                'REST APIs' => null,
+                'Python' => 'python',
+            ],
+            'Frontend' => [
+                'Tailwind CSS' => 'tailwindcss',
+                'JavaScript' => 'javascript',
+                'Alpine.js' => 'alpinedotjs',
+                'Blade' => 'laravel',
+                'PWA development' => 'pwa',
+            ],
+            'Tools' => [
+                'Git / GitHub' => 'github',
+                'SQLite' => 'sqlite',
+                'Composer' => 'composer',
+                'Vite' => 'vite',
+            ],
         ];
 
         foreach ($skills as $category => $names) {
-            foreach ($names as $i => $name) {
+            $i = 0;
+            foreach ($names as $name => $icon) {
                 Skill::updateOrCreate(
                     ['name' => $name],
                     [
                         'category' => $category,
-                        'proficiency' => $proficiency[$name] ?? null,
-                        'sort_order' => $i,
+                        'icon' => $icon,
+                        'sort_order' => $i++,
                     ],
                 );
             }

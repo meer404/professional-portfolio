@@ -9,12 +9,11 @@ class Skill extends Model
 {
     public const CATEGORIES = ['Backend', 'Frontend', 'Tools'];
 
-    protected $fillable = ['name', 'category', 'proficiency', 'sort_order'];
+    protected $fillable = ['name', 'category', 'icon', 'sort_order'];
 
     protected function casts(): array
     {
         return [
-            'proficiency' => 'integer',
             'sort_order' => 'integer',
         ];
     }
