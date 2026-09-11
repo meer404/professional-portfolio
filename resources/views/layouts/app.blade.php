@@ -13,21 +13,28 @@
     <link rel="icon" type="image/svg+xml" href="{{ asset('brand/mir-icon-white.svg') }}" media="(prefers-color-scheme: dark)">
     <link rel="mask-icon" href="{{ asset('brand/mir-icon-purple.svg') }}" color="#6d28d9">
 
-    <title>@yield('title', $settings->name . ' — ' . ($settings->trans('hero_tagline') ?: __('Full-Stack Developer')))</title>
-    <meta name="description" content="@yield('meta_description', strip_tags($settings->trans('about_me') ?? ''))">
+    <title>@yield('title', config('seo.title'))</title>
+    <meta name="description" content="@yield('meta_description', config('seo.description'))">
+    <meta name="keywords" content="{{ config('seo.keywords') }}">
+    <meta name="author" content="{{ config('seo.author') }}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
 
     {{-- Social / Open Graph + Twitter Card --}}
-    <meta property="og:title" content="@yield('og_title', $settings->name . ' — ' . ($settings->trans('hero_tagline') ?: __('Full-Stack Developer')))">
-    <meta property="og:description" content="@yield('og_description', strip_tags($settings->trans('about_me') ?? ''))">
+    <meta property="og:title" content="@yield('og_title', config('seo.title'))">
+    <meta property="og:description" content="@yield('og_description', config('seo.description'))">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:site_name" content="{{ $settings->name }}">
-    <meta property="og:image" content="@yield('og_image', $settings->assetUrl($settings->profile_photo) ?? asset('brand/mir-icon-purple.svg'))">
+    <meta property="og:image" content="@yield('og_image', config('seo.image'))">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="{{ str_replace('-', '_', app()->getLocale() === 'ckb' ? 'ckb_IQ' : 'en_US') }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('og_title', $settings->name . ' — ' . ($settings->trans('hero_tagline') ?: __('Full-Stack Developer')))">
-    <meta name="twitter:description" content="@yield('og_description', strip_tags($settings->trans('about_me') ?? ''))">
-    <meta name="twitter:image" content="@yield('og_image', $settings->assetUrl($settings->profile_photo) ?? asset('brand/mir-icon-purple.svg'))">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="@yield('og_title', config('seo.title'))">
+    <meta name="twitter:description" content="@yield('og_description', config('seo.description'))">
+    <meta name="twitter:image" content="@yield('og_image', config('seo.image'))">
 
     {{-- Resolve theme before first paint to avoid a flash --}}
     <script>
