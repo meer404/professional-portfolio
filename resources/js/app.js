@@ -28,7 +28,7 @@ Alpine.directive('reveal', (el, { modifiers }) => {
 
     const delayMod = modifiers.find((m) => m.startsWith('delay-'));
     if (delayMod) {
-        el.style.transitionDelay = `${parseInt(delayMod.replace('delay-', ''), 10)}ms`;
+        el.style.transitionDelay = `${Number.parseInt(delayMod.replace('delay-', ''), 10)}ms`;
     }
 
     if (!('IntersectionObserver' in window)) {
