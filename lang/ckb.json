@@ -15,7 +15,7 @@
     "View all projects": "بینینی هەموو پڕۆژەکان",
     "View project": "بینینی پڕۆژە",
     "Back to projects": "گەڕانەوە بۆ پڕۆژەکان",
-    "Read case study": "خوێندنەوەی پڕۆژە",
+    "Read case study": " بینینی پڕۆژە",
     "Case study": "پڕۆژە",
     "At a glance": "کورتەیەک",
     "Problem": "کێشە",
@@ -47,5 +47,10 @@
     "Error": "هەڵە",
     "Page not found": "لاپەڕەکە نەدۆزرایەوە",
     "The page you're looking for doesn't exist or has been moved.": "ئەو لاپەڕەیەی دەتەوێت نییە یان گۆڕاوە.",
-    "Go Home": "سەرەتا"
+    "Go Home": "سەرەتا",
+    "Skip to content": "بازدان بۆ ناوەڕۆک",
+    "Case studies": "پڕۆژەکان",
+    "A closer look at problems I set out to solve — and what shipped.": "ڕوانگەیەکی نزیکتر بۆ ئەو کێشانەی هەوڵم داوە چارەسەریان بکەم — و ئەنجامی کۆتایی.",
+    "Education & experience": "خوێندن و ئەزموون",
+    "Have a project in mind or a role to fill? Send a message and I will get back to you.": "پڕۆژەیەکت لە مێشدایە یان شوێنێکت هەیە پڕی بکەیتەوە؟ پەیامێک بنێرە، بەم زووانە وەڵامت دەدەمەوە."
 }

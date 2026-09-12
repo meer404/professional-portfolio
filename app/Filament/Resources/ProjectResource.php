@@ -121,8 +121,9 @@ class ProjectResource extends Resource
                         ->appendFiles()
                         ->image()
                         ->imageEditor()
+                        ->maxSize(8192)
                         ->panelLayout('grid')
-                        ->helperText('Drag to reorder. First image is used as the card thumbnail.'),
+                        ->helperText('Drag to reorder. First image is used as the card thumbnail. Max 8 MB each.'),
                 ]),
         ]);
     }

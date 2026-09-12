@@ -33,9 +33,10 @@ class ClientResource extends Resource
                 ->required()
                 ->image()
                 ->imageEditor()
+                ->maxSize(4096)
                 ->disk('public')
                 ->directory('clients')
-                ->helperText('Company logo. A transparent PNG or SVG on a light background works best.'),
+                ->helperText('Company logo. A transparent PNG or SVG on a light background works best. Max 4 MB.'),
 
             Forms\Components\TextInput::make('website_url')
                 ->label('Website URL')

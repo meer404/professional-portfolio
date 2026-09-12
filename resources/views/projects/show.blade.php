@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', $project->title . ' — ' . $settings->name)
-@section('meta_description', $project->problem)
+@section('title', e($project->title . ' — ' . $settings->name))
+@section('meta_description', e($project->problem))
 @section('og_type', 'article')
-@section('og_title', $project->title . ' — ' . $settings->name)
-@section('og_description', strip_tags($project->problem ?? ''))
-@section('og_image', $project->getFirstMedia('screenshots')?->getUrl('web') ?? ($settings->assetUrl($settings->profile_photo) ?? asset('brand/mir-icon-purple.svg')))
+@section('og_title', e($project->title . ' — ' . $settings->name))
+@section('og_description', e(strip_tags($project->problem ?? '')))
+@section('og_image', e($project->getFirstMedia('screenshots')?->getUrl('web') ?? ($settings->assetUrl($settings->profile_photo) ?? asset('brand/mir-icon-purple.svg'))))
 
 @section('content')
 @php

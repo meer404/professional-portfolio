@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
+use App\Notifications\NewContactMessage;
+use App\Settings\SiteSettings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class ContactController extends Controller
 {
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, SiteSettings $settings): RedirectResponse
     {
         // Honeypot: real users never fill this hidden field.
         if (filled($request->input('website'))) {
@@ -21,7 +24,12 @@ class ContactController extends Controller
             'message' => ['required', 'string', 'min:10', 'max:5000'],
         ]);
 
-        ContactMessage::create($data);
+        $message = ContactMessage::create($data);
+
+        if ($settings->contact_email) {
+            Notification::route('mail', $settings->contact_email)
+                ->notify(new NewContactMessage($message));
+        }
 
         return back()
             ->with('contact_status', 'ok')

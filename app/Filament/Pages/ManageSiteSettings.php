@@ -35,9 +35,10 @@ class ManageSiteSettings extends SettingsPage
                         ->avatar()
                         ->imageEditor()
                         ->imageEditorAspectRatios(['1:1', '4:5'])
+                        ->maxSize(4096)
                         ->disk('public')
                         ->directory('site')
-                        ->helperText('A real headshot. Square or 4:5 works best.'),
+                        ->helperText('A real headshot. Square or 4:5 works best. Max 4 MB.'),
 
                     Forms\Components\TextInput::make('contact_email')
                         ->label('Public contact email')
@@ -62,9 +63,10 @@ class ManageSiteSettings extends SettingsPage
                         ->label('Hero screenshot')
                         ->image()
                         ->imageEditor()
+                        ->maxSize(8192)
                         ->disk('public')
                         ->directory('site')
-                        ->helperText('A screenshot of one of your projects, shown in a framed window in the hero. Landscape (16:9) works best.'),
+                        ->helperText('A screenshot of one of your projects, shown in a framed window in the hero. Landscape (16:9) works best. Max 8 MB.'),
 
                     Forms\Components\TextInput::make('hero_artifact_label')
                         ->label('Hero screenshot label')
@@ -84,11 +86,13 @@ class ManageSiteSettings extends SettingsPage
                     Forms\Components\FileUpload::make('cv_en')
                         ->label('CV — English (PDF)')
                         ->acceptedFileTypes(['application/pdf'])
+                        ->maxSize(10240)
                         ->disk('public')->directory('site'),
 
                     Forms\Components\FileUpload::make('cv_ckb')
                         ->label('CV — Kurdish (PDF)')
                         ->acceptedFileTypes(['application/pdf'])
+                        ->maxSize(10240)
                         ->disk('public')->directory('site'),
                 ]),
 
