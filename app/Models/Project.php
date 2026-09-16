@@ -57,7 +57,15 @@ class Project extends Model implements HasMedia
         $value = $this->getTranslation('key_features', app()->getLocale(), false)
             ?: $this->getTranslation('key_features', 'en', false);
 
-        return array_values(array_filter((array) $value, fn ($v) => filled($v)));
+        $items = array_values(array_filter((array) $value, fn ($v) => filled($v)));
+
+        // Handle Filament Repeater saving items as {"feature": "text"} instead of plain strings
+        return array_map(function ($item) {
+            if (is_array($item)) {
+                return (string) ($item["feature"] ?? reset($item) ?? "");
+            }
+            return (string) $item;
+        }, $items);
     }
 
     public function registerMediaCollections(): void
