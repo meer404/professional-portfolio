@@ -7,11 +7,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#6d28d9">
+    <meta name="theme-color" content="#0284c7">
 
     <link rel="icon" type="image/svg+xml" href="{{ asset('brand/mir-icon-purple.svg') }}">
     <link rel="icon" type="image/svg+xml" href="{{ asset('brand/mir-icon-white.svg') }}" media="(prefers-color-scheme: dark)">
-    <link rel="mask-icon" href="{{ asset('brand/mir-icon-purple.svg') }}" color="#6d28d9">
+    <link rel="mask-icon" href="{{ asset('brand/mir-icon-purple.svg') }}" color="#0284c7">
 
     <title>@yield('title', config('seo.title'))</title>
     <meta name="description" content="@yield('meta_description', config('seo.description'))">

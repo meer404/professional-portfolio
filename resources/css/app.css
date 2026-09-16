@@ -13,23 +13,23 @@
     --font-display: 'Sora', var(--font-sans);
     --font-kurdish: 'Noto Kufi Arabic', 'Noto Naskh Arabic', var(--font-sans);
 
-    /* Brand: vibrant indigo/purple */
-    --color-brand-50: #f5f3ff;
-    --color-brand-100: #ede9fe;
-    --color-brand-200: #ddd6fe;
-    --color-brand-300: #c4b5fd;
-    --color-brand-400: #a78bfa;
-    --color-brand-500: #8b5cf6;
-    --color-brand-600: #7c3aed;
-    --color-brand-700: #6d28d9;
-    --color-brand-800: #5b21b6;
-    --color-brand-900: #4c1d95;
-    --color-brand-950: #2e1065;
+    /* Brand: sky blue */
+    --color-brand-50: #f0f9ff;
+    --color-brand-100: #e0f2fe;
+    --color-brand-200: #bae6fd;
+    --color-brand-300: #7dd3fc;
+    --color-brand-400: #38bdf8;
+    --color-brand-500: #0ea5e9;
+    --color-brand-600: #0284c7;
+    --color-brand-700: #0369a1;
+    --color-brand-800: #075985;
+    --color-brand-900: #0c4a6e;
+    --color-brand-950: #082f49;
 
-    /* Accent: electric blue */
-    --color-accent-400: #60a5fa;
-    --color-accent-500: #3b82f6;
-    --color-accent-600: #2563eb;
+    /* Accent: cyan */
+    --color-accent-400: #22d3ee;
+    --color-accent-500: #06b6d4;
+    --color-accent-600: #0891b2;
 
     --color-ink: #14121f;
 
@@ -38,7 +38,7 @@
     --color-line: #e4e1ec;
     --color-line-dark: #2a2636;
 
-    --shadow-glow: 0 0 60px -12px rgba(124, 58, 237, 0.45);
+    --shadow-glow: 0 0 60px -12px rgba(2, 132, 199, 0.45);
     --animate-marquee: marquee 30s linear infinite;
 }
 
